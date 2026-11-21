@@ -14,3 +14,12 @@
 - [X] If the user does not exist, create a new User document with the provided data. The pre-save hook you wrote in Lesson 1 should automatically hash the password.
 - [X] Save the new user to the database.
 - [X] Respond with a 201 status and the newly created user object (excluding the password).
+
+### Build the Login Endpoint
+- [ ] Create a POST route `/api/users/login`.
+- [ ] In this route, take the email and password from the req.body.
+- [ ] Find a user in the database with the matching email. If no user is found, return a 400 status with a generic error message (e.g., “Incorrect email or password.”).
+- [ ] If a user is found, use the isCorrectPassword instance method (or bcrypt.compare) to compare the incoming password with the user’s stored hashed password.
+- [ ] If the passwords do not match, return a 400 status with the same generic error message.
+- [ ] If the passwords match, create a JWT for the user using the jsonwebtoken library. The payload should contain non-sensitive user data like their _id and username.
+- [ ] Respond with a JSON object containing the signed token and the user’s data.
