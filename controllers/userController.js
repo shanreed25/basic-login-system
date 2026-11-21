@@ -5,9 +5,9 @@ import { signToken } from '../utils/auth.js';
 //GET /api/users
 export async function getUsers(req, res) {
   try {
-    const users = await User.find();
+    const users = await User.find().select("-password");
 
-    res.status(201).json(users);
+    res.status(200).json(users);
   } catch (err) {
     res.status(400).json({ message: "Error getting users", error: err.message });
   }
@@ -51,7 +51,7 @@ export async function login(req, res) {
     //or
     //if user is found and password is incorrect
     if (!user || !(await user.isCorrectPassword(password))) {
-      return res.status(401).json({ message: "Incorrect email or password" });
+      return res.status(400).json({ message: "Incorrect email or password" });
     }
 
     const token = signToken(user);
