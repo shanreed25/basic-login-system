@@ -5,14 +5,16 @@ import { signToken } from '../utils/auth.js';
 //GET /api/users
 export async function getUsers(req, res) {
   try {
-    const users = await User.find().select("-password");
+    //without hashed password returned
+    // const users = await User.find().select("-password");
+
+    const users = await User.find();
 
     res.status(200).json(users);
   } catch (err) {
     res.status(400).json({ message: "Error getting users", error: err.message });
   }
 }
-
 
 
 //POST /api/users/register
