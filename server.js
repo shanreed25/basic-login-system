@@ -5,17 +5,13 @@ import userRoutes from './routes/userRoutes.js'
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+app.use(express.json())
 app.use('/api/users', userRoutes)
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Zenith Products API started' });
+  res.send({ message: 'Basic Login System Started' });
 });
 
-
-app.post('/', (req, res) => {
-  res.json({ message: 'Zenith Products API started' });
-});
 
 await connectToDB();
 
