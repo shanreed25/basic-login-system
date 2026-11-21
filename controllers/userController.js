@@ -18,6 +18,16 @@ export async function getUsers(req, res) {
 export async function registerUser(req, res) {
   try {
     const { username, email, password } = req.body;
+
+    // Check if a user with the given email already exists
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "A user with that email already exists" });
+    }
+
     const user = await User.create({ username, email, password });
 
     res.status(201).json({
